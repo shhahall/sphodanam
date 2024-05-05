@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Add</title>
+</head>
+<body>
+    
+    <div class="outer-box">
+        <img src="{% static 'images/bg.jpg' %}" alt="" srcset="">
+        <form class="inner-box" id="myForm" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="file_name" id="fileName" placeholder="Enter File Name">
+            
+            <select name="subject" id="subjectSelect">
+                <option value="none">Select a Subject</option>
+                {% for x in sub %}
+                    <option value="{{ x.id }}">{{ x.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="select-file" for="fileInput">Choose a File</label>
+            <input id="fileInput" name="file" type="file">
+
+            <button type="submit" id="submitButton">Add</button>
+        </form>
+        <div class="water-mark">
+            <span>by sphodanam | kalakkan.ct</span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            var fileName = document.getElementById('fileName').value;
+            var subjectSelect = document.getElementById('subjectSelect');
+            var fileInput = document.getElementById('fileInput');
+
+            if (fileName.trim() === '') {
+                alert('Please enter a file name.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            if (subjectSelect.value === 'none') {
+                alert('Please select a subject.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please choose a file.');
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+        });
+    </script>
+   
+</body>
+</html>

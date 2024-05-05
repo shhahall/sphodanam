@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="outer-box">
+        <img src="{% static 'images/bg.jpg' %}" alt="" srcset="">
+        <div class="inner-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>DOWNLOAD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in notes%}
+                    <tr>
+                        <td>{{x.name}}</td>
+                        <td><a href="{{x.file.url}}">Download</a></td>
+                    </tr>
+                    {% endfor %}
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+            
+            <button onclick="redirect();" type="submit">MORE</button>
+            <script>
+                function redirect(){
+                    var link="{% url 'index' %}"
+                    window.location.href=link
+                }
+            </script>
+        </div>
+        <div class="water-mark">
+            <span>by sphodanam | kalakkan.ct</span>
+        </div>
+    </div>
+   
+</body>
+</html>

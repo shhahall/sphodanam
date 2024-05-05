@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Home</title>
+    <title>Add</title>
 </head>
 <body>
     
@@ -13,13 +13,15 @@
         <img src="{% static 'images/bg.jpg' %}" alt="" srcset="">
         <form class="inner-box" id="myForm" action="" method="post">
             {% csrf_token %}
+            
             <select name="semester" id="semesterSelect">
-                <option value="sem">Select your semester</option>
+                <option value="sem">Select semester</option>
                 {% for x in sem %}
                 <option value="{{ x.sem }}">{{ x.sem }}</option>
                 {% endfor %}
             </select>
-            <button type="submit">Next</button>
+            
+            <button type="submit" id="submitButton">Next</button>
         </form>
         <div class="water-mark">
             <span>by sphodanam | kalakkan.ct</span>
@@ -28,16 +30,12 @@
 
     <script>
         document.getElementById('myForm').addEventListener('submit', function(event) {
-            var selectedValue = document.getElementById('semesterSelect').value;
-            if (!isValidNumber(selectedValue)) {
-                alert('Please select a valid semester.');
+            var semesterSelect = document.getElementById('semesterSelect');
+            if (semesterSelect.value === 'sem') { // Check if "Select semester" is still selected
+                alert('Please select a semester.');
                 event.preventDefault(); // Prevent form submission
             }
         });
-
-        function isValidNumber(value) {
-            return /^\d+$/.test(value); // Check if value contains only digits
-        }
     </script>
    
 </body>

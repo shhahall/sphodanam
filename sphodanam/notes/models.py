@@ -4,8 +4,6 @@ from django.db import models
 class Semester(models.Model):
     sem=models.IntegerField()
     
-    def __str__(self) -> str:
-        return self.sem
     
 class Subjects(models.Model):
     name=models.CharField(max_length=100)
@@ -16,3 +14,4 @@ class Subjects(models.Model):
 class Notes(models.Model):
    name=models.CharField(max_length=100)
    subject=models.ForeignKey(Subjects,on_delete=models.CASCADE,related_name='notes')
+   file=models.FileField(upload_to='notes/')
